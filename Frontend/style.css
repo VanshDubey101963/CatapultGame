@@ -1,0 +1,53 @@
+
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background-color: skyblue;
+    display: flex;
+    justify-content: center;  /* Centers everything horizontally */
+    align-items: center;      /* Centers everything vertically */
+    height: 100vh;            /* Full viewport height */
+}
+
+.game-container {
+    position: relative; /* Container for absolute positioning */  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#btn {
+    position: absolute; /* Position the button inside the canvas */
+    top: 50%;           /* Center button vertically */
+    left: 50%;          /* Center button horizontally */
+    transform: translate(-50%, -50%);  /* Adjust to center perfectly */
+    padding: 15px 30px; /* Button size */
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #32CD32; /* Green background */
+    color: white;
+    border: 3px solid #C1A76D; /* Border matching the gold outline */
+    border-radius: 50px; /* Rounded edges for pill shape */
+    box-shadow: inset 0px -3px 5px rgba(0, 0, 0, 0.2), 
+                0px 4px 6px rgba(0, 0, 0, 0.1); /* Inner and outer shadows */
+    z-index: 1; /* Ensure button is above canvas */
+    text-decoration: none;
+    font-weight: bold; /* Make text bold */
+}
+
+#btn:hover {
+    background-color: #28a428; /* Slightly darker green on hover */
+    box-shadow: inset 0px -3px 8px rgba(0, 0, 0, 0.3),
+                0px 6px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+
+#gamecanvas {
+    border: 2px solid black;
+    background-image: url("image.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
