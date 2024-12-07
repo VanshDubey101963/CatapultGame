@@ -3,8 +3,8 @@ const ctx = canvas.getContext("2d");
 canvas.width = 1400;
 canvas.height = 600 ;
 
-let bird = { x: 400, y: 350, radius: 20, color: 'red', vx: 0, vy: 0, isMoving: false };
-let slingShot = {x: 400 , y: 350 , isDragging: false , pullStart: {x: 0 , y : 0}, image: new Image()}
+let bird = { x: 400, y: 360, radius: 20, color: 'red', vx: 0, vy: 0, isMoving: false };
+let slingShot = {x: 350 , y: 350 , isDragging: false , pullStart: {x: 0 , y : 0}, image: new Image()}
 slingShot.image.src = "../assets/sprites/Slingshot.jpg";
 
 const gravity = 0.4;
@@ -53,8 +53,8 @@ function gameLoop() {
 
     if (slingShot.isDragging) {
         ctx.beginPath();
-        ctx.moveTo(slingShot.x, slingShot.y);
-        ctx.lineTo(bird.x, bird.y);
+        ctx.moveTo(bird.x , bird.y);
+        ctx.lineTo(slingShot.pullStart.x, slingShot.pullStart.y);
         ctx.strokeStyle = 'black';
         ctx.lineWidth = 4;
         ctx.stroke();
