@@ -3,7 +3,16 @@ const ctx = canvas.getContext("2d");
 canvas.width = 1400;
 canvas.height = 600 ;
 
-let bird = { x: 400, y: 360, radius: 20, color: 'red', vx: 0, vy: 0, isMoving: false };
+let bird = { x: 400, y: 360, radius: 20, color: 'red', vx: 0, vy: 0, isMoving: false ,
+    resetPosition: function () {
+        this.x = 400;
+        this.y = 360;
+        this.vx = 0;
+        this.vy = 0;
+        this.isMoving = false;
+    },
+ };
+
 let slingShot = {x: 350 , y: 350 , isDragging: false , pullStart: {x: 0 , y : 0}, image: new Image()}
 slingShot.image.src = "../assets/sprites/Slingshot.jpg";
 
@@ -46,9 +55,16 @@ canvas.addEventListener("mouseup", (e) => {
     }
 });
 
+document.addEventListener('keydown',(e)=>{
+    if(e.key == 'r')
+    {
+        bird.resetPosition();
+    }
+})
+
 
 function gameLoop() {
-    ctx.clearRect(0,0,4000,600);
+    ctx.clearRect(0,0,1400,600);
     ctx.drawImage(slingShot.image, slingShot.x , slingShot.y , 100, 150);
 
     if (slingShot.isDragging) {
@@ -61,11 +77,14 @@ function gameLoop() {
         ctx.closePath();
     }
 
+
     ctx.beginPath();
     ctx.arc(bird.x, bird.y, bird.radius, 0, Math.PI * 2);
     ctx.fillStyle = bird.color;
     ctx.fill();
     ctx.closePath();
+
+    
 
     if (bird.isMoving) {
         bird.vy += gravity;
@@ -75,12 +94,12 @@ function gameLoop() {
         bird.x += bird.vx;
         bird.y += bird.vy;
 
-        if (Math.abs(bird.vx) < 0.1 && Math.abs(bird.vy) < 0.1) {
+        if (Math.abs(bird.vx) < 0.1 && Math.abs(bird.vy) > 0.1) {
             bird.isMoving = false;
-            bird.x = slingShot.x;
-            bird.y = slingShot.y;
+            bird.resetPosition();
         }
     }
+
 
     if (bird.y + bird.radius > canvas.height) {
         bird.y = canvas.height - bird.radius;
@@ -90,6 +109,7 @@ function gameLoop() {
     if (bird.x + bird.radius > canvas.width || bird.x - bird.radius < 0) {
         bird.vx *= -1;
     }
+
 
     requestAnimationFrame(gameLoop);
 }
