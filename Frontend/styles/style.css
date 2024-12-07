@@ -46,7 +46,7 @@ body {
 
 #gamecanvas {
     border: 2px solid black;
-    background-image: url("image.jpg");
+    background-image: url("../assets/backgrounds/stagebg.jpg");
     background-size: cover;
     background-position: center;
 }
