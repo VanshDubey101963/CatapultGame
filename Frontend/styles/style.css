@@ -1,50 +1,116 @@
-
 body {
     margin: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
     background-color: skyblue;
     display: flex;
-    justify-content: center;  /* Centers everything horizontally */
-    align-items: center;      /* Centers everything vertically */
-    height: 100vh;            /* Full viewport height */
+    justify-content: center;  
+    align-items: center;      
+    height: 100vh;           
 }
 
 .game-container {
-    position: relative; /* Container for absolute positioning */  
+    position: relative; 
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
+} 
 
 #btn {
-    position: absolute; /* Position the button inside the canvas */
-    top: 50%;           /* Center button vertically */
-    left: 50%;          /* Center button horizontally */
-    transform: translate(-50%, -50%);  /* Adjust to center perfectly */
-    padding: 15px 30px; /* Button size */
-    font-size: 18px;
+    position: absolute; 
+    top: 60%;          
+    left: 50%;         
+    transform: translate(-50%, -50%); 
+    padding: 15px 30px; 
+    font-size: 50px;
     cursor: pointer;
-    background-color: #32CD32; /* Green background */
+    background-color: #32CD32; 
     color: white;
-    border: 3px solid #C1A76D; /* Border matching the gold outline */
-    border-radius: 50px; /* Rounded edges for pill shape */
+    border: 3px solid #C1A76D;
+    border-radius: 50px; 
     box-shadow: inset 0px -3px 5px rgba(0, 0, 0, 0.2), 
-                0px 4px 6px rgba(0, 0, 0, 0.1); /* Inner and outer shadows */
-    z-index: 1; /* Ensure button is above canvas */
+                0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1; 
     text-decoration: none;
-    font-weight: bold; /* Make text bold */
+    font-weight: bold;
+}
+
+#reset {
+    position: absolute;
+    top: 23%;          
+    left: 84%;          
+    transform: translate(-50%, -50%);
+    width: 50px; /* Circular size */
+    height: 50px;
+    background: radial-gradient(circle, #a1f48a 60%, #70f170 100%); /* Green gradient background */
+    border: 6px solid #C1A76D; /* Brownish border */
+    border-radius: 50%; /* Makes the button circular */
+    box-shadow: inset 0px -5px 10px rgba(0, 0, 0, 0.2), 
+                0px 6px 12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Inner arrow icon styling */
+#reset::before {
+    content: '⟳'; /* Arrow symbol */
+    font-size: 36px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Add depth to the icon */
+}
+
+
+#score {
+    position: absolute;
+    top: 7%;         
+    left: 52%;       
+    transform: translate(-50%, -50%); 
+    padding: 15px 30px; 
+    font-size: 50px;
+    cursor: pointer;
+    color: white;
+    z-index: 1; 
+    text-decoration: none;
+    font-weight: bold; 
+}
+
+
+#Gamename {
+    position: absolute; 
+    top: 30%;           
+    left: 50%;          
+    transform: translate(-50%, -50%);  
+    font-size: 150px;
+    cursor: pointer;
+    z-index: 1; 
+    text-decoration: none;
+    font-weight: bold;
+    color: transparent;
+    background: linear-gradient(to right, green 50%, rgb(101, 21, 21) 50%);
+    -webkit-background-clip: text;
+    -webkit-text-stroke: 3px black;
 }
 
 #btn:hover {
-    background-color: #28a428; /* Slightly darker green on hover */
+    background-color: #28a428;
     box-shadow: inset 0px -3px 8px rgba(0, 0, 0, 0.3),
-                0px 6px 8px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+                0px 6px 8px rgba(0, 0, 0, 0.15);
 }
 
-
 #gamecanvas {
+    border: 2px solid black;
+    background-image: url("../assets/backgrounds/startbg.jpeg");
+    background-size: cover;
+    background-position: center;
+}
+
+#gamecanvasforlevel {
     border: 2px solid black;
     background-image: url("../assets/backgrounds/stagebg.jpg");
     background-size: cover;
