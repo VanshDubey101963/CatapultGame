@@ -14,15 +14,9 @@ let bird = {
         this.isMoving = false;
     },
 };
-
-bird.image.src = "../assets/sprites/ball.jpg"
-
-let slingShot = { x: 350, y: 350, isDragging: false, pullStart: { x: 0, y: 0 }, image: new Image() }
-=======
 bird.image.src = "../assets/sprites/ball.jpg";
 
 let slingShot = { x: 350, y: 350, isDragging: false, pullStart: { x: 0, y: 0 }, image: new Image() };
->>>>>>> c0df073 (added obstacles)
 slingShot.image.src = "../assets/sprites/Slingshot.jpg";
 
 const gravity = 0.4;
@@ -38,8 +32,6 @@ let gameOver = false;
 
 // Score
 let score = 0;
-
-// HTML Score Element
 const scoreElement = document.getElementById("score"); // Ensure an element with id 'score' exists in your HTML
 
 function updateScore() {
@@ -103,7 +95,6 @@ canvas.addEventListener("mouseup", () => {
         slingShot.isDragging = false;
         bird.x = slingShot.x;
         bird.y = slingShot.y;
-
     }
 });
 
@@ -172,12 +163,10 @@ function gameLoop() {
         bird.y = canvas.height - bird.radius;
         bird.vy *= -0.7;
     }
-
     // Prevent bird from moving outside canvas boundaries
     if (bird.x + bird.radius > canvas.width || bird.x - bird.radius < 0) {
         bird.vx *= -1;
     }
     requestAnimationFrame(gameLoop);
 }
-
 gameLoop();
