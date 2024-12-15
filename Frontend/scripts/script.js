@@ -32,29 +32,140 @@ canvas.addEventListener("mousedown", (e) => {
 
 let gameOver = false;
 
-// Score
 let score = 0;
-const scoreElement = document.getElementById("score"); // Ensure an element with id 'score' exists in your HTML
+const scoreElement = document.getElementById("score");
 
 function updateScore() {
     scoreElement.innerText = `Score: ${score}`;
 }
 
-// Walls
+
 let walls = [
     {
-        x: 900,
-        y: Math.random() * (canvas.height - 150) + 50,
+        x: 1000,
+        y: 550,
         width: 80,
-        height: 200,
+        height: 40,
         color: 'brown'
-    }
+    },
+    {
+        x: 1000,
+        y: 510,
+        width: 80,
+        height: 40,
+        color: 'brown'
+    },
+    {
+        x: 1000,
+        y: 470,
+        width: 80,
+        height: 40,
+        color: 'brown'
+    },
+    {
+        x: 1081,
+        y: 550,
+        width: 80,
+        height: 40,
+        color: 'brown'
+    },
+    {
+        x: 1081,
+        y: 510,
+        width: 80,
+        height: 40,
+        color: 'brown'
+    },
+    {
+        x: 1081,
+        y: 470,
+        width: 80,
+        height: 40,
+        color: 'brown'
+    },
+    {
+        x: 1000,
+        y: 430,
+        width: 80,
+        height: 40,
+        color: 'brown'
+    },
+    {
+        x: 1081,
+        y: 430,
+        width: 80,
+        height: 40,
+        color: 'brown'
+    },
+    {
+        x: 1000,
+        y: 390,
+        width: 80,
+        height: 40,
+        color: 'brown'
+    },
+    {
+        x: 1081,
+        y: 390,
+        width: 80,
+        height: 40,
+        color: 'brown'
+    },
+    {
+        x: 1081,
+        y: 390,
+        width: 80,
+        height: 40,
+        color: 'brown'
+    },
+    {
+        x: 1081,
+        y: 350,
+        width: 80,
+        height: 40,
+        color: 'brown'
+    },
+    {
+        x: 1000,
+        y: 350,
+        width: 80,
+        height: 40,
+        color: 'brown'
+    },
+    {
+        x: 1081,
+        y: 310,
+        width: 80,
+        height: 40,
+        color: 'brown'
+    },
+    {
+        x: 1000,
+        y: 310,
+        width: 80,
+        height: 40,
+        color: 'brown'
+    },
+    {
+        x: 1081,
+        y: 270,
+        width: 80,
+        height: 40,
+        color: 'brown'
+    },
+    {
+        x: 1000,
+        y: 270,
+        width: 80,
+        height: 40,
+        color: 'brown'
+    },
+   
 ];
 
 const wallImage = new Image();
 wallImage.src = "../assets/sprites/wall.jpg";
 
-// Collision detection
 function detectCollision(bird, wall) {
     return (
         bird.x + bird.radius > wall.x &&
@@ -114,7 +225,12 @@ function gameLoop() {
     ctx.drawImage(slingShot.image, slingShot.x, slingShot.y, 100, 150);
     updateScore();
 
-    // Draw slingshot band
+    if(gameOver)
+    {
+        alert(`game over with score ${score}`)
+        return;
+    }
+
     if (slingShot.isDragging) {
         ctx.beginPath();
         ctx.moveTo(bird.x, bird.y);
@@ -127,13 +243,16 @@ function gameLoop() {
 
     ctx.drawImage(bird.image , bird.x , bird.y , bird.radius, bird.radius);
 
-    walls.forEach((wall) => {
+    for (let i = walls.length - 1; i >= 0; i--) {
+        const wall = walls[i];
         ctx.drawImage(wallImage, wall.x, wall.y, wall.width, wall.height);
 
         if (detectCollision(bird, wall)) {
+            walls.splice(i, 1);
 
+            // Bounce back the bird
             if (bird.x < wall.x || bird.x > wall.x + wall.width) {
-                bird.vx = -bird.vx * 0.7; 
+                bird.vx = -bird.vx * 0.7;
             }
             if (bird.y < wall.y || bird.y > wall.y + wall.height) {
                 bird.vy = -bird.vy * 0.7;
@@ -142,9 +261,9 @@ function gameLoop() {
             score += 10;
             updateScore();
         }
-    });
+    }
 
-    // Bird physics and motion
+ 
     if (bird.isMoving) {
         bird.vy += gravity;
         bird.vx *= friction;
@@ -153,8 +272,8 @@ function gameLoop() {
         bird.x += bird.vx;
         bird.y += bird.vy;
 
-        // Stop bird if velocities are negligible
-        if (Math.abs(bird.vx) < 0.1 && Math.abs(bird.vy) < 0.1) {
+        
+        if (Math.abs(bird.vx) < 0.1 && Math.abs(bird.vy) > 0.1) {
             bird.isMoving = false;
             gameOver = true;
             bird.resetPosition();
@@ -165,7 +284,13 @@ function gameLoop() {
         bird.y = canvas.height - bird.radius;
         bird.vy *= -0.7;
     }
-    // Prevent bird from moving outside canvas boundaries
+
+    if (bird.y - bird.radius < 0) {
+        bird.y = bird.radius;
+        bird.vy *= -0.7;
+    }
+
+
     if (bird.x + bird.radius > canvas.width || bird.x - bird.radius < 0) {
         bird.vx *= -1;
     }
