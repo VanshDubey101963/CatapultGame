@@ -19,7 +19,11 @@ body {
 
 #btn {
     position: absolute; 
+<<<<<<< HEAD
     top: 60%;          
+=======
+    top: 70%;          
+>>>>>>> c0df073 (added obstacles)
     left: 50%;         
     transform: translate(-50%, -50%); 
     padding: 15px 30px; 
@@ -38,7 +42,11 @@ body {
 
 #reset {
     position: absolute;
+<<<<<<< HEAD
     top: 23%;          
+=======
+    top: 13%;          
+>>>>>>> c0df073 (added obstacles)
     left: 84%;          
     transform: translate(-50%, -50%);
     width: 50px; /* Circular size */
@@ -93,6 +101,10 @@ body {
     font-weight: bold;
     color: transparent;
     background: linear-gradient(to right, green 50%, rgb(101, 21, 21) 50%);
+<<<<<<< HEAD
+=======
+    background-clip: text;
+>>>>>>> c0df073 (added obstacles)
     -webkit-background-clip: text;
     -webkit-text-stroke: 3px black;
 }
