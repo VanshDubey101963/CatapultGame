@@ -27,6 +27,8 @@ canvas.addEventListener("mousedown", (e) => {
     if (distance <= bird.radius) {
         slingShot.isDragging = true
         slingShot.pullStart = { x: e.offsetX, y: e.offsetY }
+    }
+});  
 
 let gameOver = false;
 
@@ -104,19 +106,13 @@ document.addEventListener('keydown', (e) => {
     }
 })
 
-function gameLoop() {
-    ctx.clearRect(0, 0, 1400, 600);
-    ctx.drawImage(slingShot.image, slingShot.x, slingShot.y, 100, 150);
-
-        score = 0;
-        gameOver = false; // For restart
-        updateScore();
-    }
-});
 
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(slingShot.image, slingShot.x, slingShot.y, 100, 150);
+
+    ctx.drawImage(slingShot.image, slingShot.x, slingShot.y, 100, 150);
+    updateScore();
 
     // Draw slingshot band
     if (slingShot.isDragging) {
@@ -169,4 +165,5 @@ function gameLoop() {
     }
     requestAnimationFrame(gameLoop);
 }
+
 gameLoop();
