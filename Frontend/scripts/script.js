@@ -127,15 +127,20 @@ function gameLoop() {
 
     ctx.drawImage(bird.image , bird.x , bird.y , bird.radius, bird.radius);
 
-    // Draw walls
     walls.forEach((wall) => {
         ctx.drawImage(wallImage, wall.x, wall.y, wall.width, wall.height);
 
-        // Check collision
         if (detectCollision(bird, wall)) {
+
+            if (bird.x < wall.x || bird.x > wall.x + wall.width) {
+                bird.vx = -bird.vx * 0.7; 
+            }
+            if (bird.y < wall.y || bird.y > wall.y + wall.height) {
+                bird.vy = -bird.vy * 0.7;
+            }
+
             score += 10;
             updateScore();
-            bird.resetPosition(); // Reset bird's position after collision
         }
     });
 
@@ -151,6 +156,7 @@ function gameLoop() {
         // Stop bird if velocities are negligible
         if (Math.abs(bird.vx) < 0.1 && Math.abs(bird.vy) < 0.1) {
             bird.isMoving = false;
+            gameOver = true;
             bird.resetPosition();
         }
     }
